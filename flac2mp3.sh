@@ -1,12 +1,6 @@
 #!/bin/bash
 
-#for a in ./*.flac; do
-#  < /dev/null ffmpeg -i "$a" -qscale:a 0 "${a[@]/%flac/mp3}"
-#done
-
 for a in ./*.flac; do
-	# give output correct extension
-	#OUTF="${a[@]/%flac/mp3}"
 	OUTF="$(basename $a .flac).mp3"
 	echo "OUTF:$OUTF"
 
