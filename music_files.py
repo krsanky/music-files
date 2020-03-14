@@ -1,4 +1,5 @@
 import sys
+import toml
 
 def system_example():
 	flac_cmd = 'flac ...'
@@ -10,6 +11,8 @@ def system_example():
 
 def main():
 	print("hey %s" % sys.argv[0])
+	d = toml.load("settings.toml")
+	print(d)
 
 if __name__ == "__main__":
 	main()
