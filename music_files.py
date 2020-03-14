@@ -3,6 +3,7 @@ import toml
 import musicbrainzngs
 import musicbrainzngs as m
 import musicbrainzngs as mb
+import discogs_test as dt
 
 def init():
 	mb.set_useragent("My Crazy Music App", "3.7", "http://d34d.net/music")
@@ -14,6 +15,13 @@ def system_example():
 		failure(r, "error encoding %s" % outname)
 		system("touch '%s/FAILURE'" % mp3_dir)
 	return 0
+
+def find_capt_n_resp():
+	"""
+	captain not responsible
+	"""
+	result = musicbrainzngs.search_artists(artist="Captain Not Responsible", type="group")
+	return result
 
 def test_mb():
 	# If you plan to submit data, authenticate
@@ -46,12 +54,24 @@ def test_mb2():
 
 	#m.submit_ratings(recording_ratings={"cb4d4d70-930c-4d1a-a157-776de18be66a":20})
 
+def tag_capt_n_resp_ship_of_fools():
+	"""
+	Out[4]: <Artist 779504 'Captain Not Responsible'>
+	Out[6]: <Release 1902686 'Captain Not Responsible'>
+	Out[7]: <Release 1859831 'Ship Of Fools'>
+	"""
+	d = dt.init()
+	a = d.artist(779504)
+	print(a.releases[2].tracklist)
+
 def main():
 	print("hey %s" % sys.argv[0])
 	d = toml.load("settings.toml")
 	print(d)
 	init()
 	test_mb()
+
+	tag_capt_n_resp_ship_of_fools()
 
 if __name__ == "__main__":
 	main()
