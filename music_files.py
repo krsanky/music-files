@@ -5,6 +5,7 @@ import musicbrainzngs
 import musicbrainzngs as m
 import musicbrainzngs as mb
 import discogs_test as dt
+from mediafile import MediaFile 
 
 def init():
 	mb.set_useragent("My Crazy Music App", "3.7", "http://d34d.net/music")
@@ -33,8 +34,15 @@ def test_mb2():
 	#print(m.get_releases_by_discid("BG.iuI50.qn1DOBAWIk8fUYoeHM-"))
 	#print(m.get_recordings_by_isrc("GBAYE9300106"))
 
-def _tag_file(fn, artist, album, trknum, songname):
-	print("fn:{} a:{} album:{} trknum:{} song:{}".format(fn, artist, album, trknum, songname))
+def _tag_file(f, artist, album, trknum, songname):
+	print("f:{} a:{} album:{} trknum:{} song:{}".format(f, artist, album, trknum, songname))
+	mf = MediaFile(f)
+	mf.artist = artist
+	mf.albumartist = artist
+	mf.album = album
+	mf.track = trknum
+	mf.title = songname
+	mf.save()
 
 def tag_capt_n_resp_ship_of_fools():
 	"""
@@ -47,12 +55,13 @@ def tag_capt_n_resp_ship_of_fools():
 	release = a.releases[2] # this is probably bad, should match on album name
 	tracklist = release.tracklist
 	print("tracklist len:%d" % len(tracklist))
-	srcd = "SOURCE/cap-n-resp/"
+	srcd = "SOURCE/Capt-n-resp/"
+	#srcd = "SOURCE/cap-n-resp/" #mp3
 
 	filesd = Path(srcd)
 	for file, track in zip(filesd.iterdir(), tracklist):
 		print("file:{} trk:{} {}".format(file.name, track.position, track.title))
-		_tag_file(file.name, a.name, release.title, track.position, track.title)
+		_tag_file(file, a.name, release.title, track.position, track.title)
 
 	return tracklist
 
