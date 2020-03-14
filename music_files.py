@@ -2,6 +2,10 @@ import sys
 import toml
 import musicbrainzngs
 import musicbrainzngs as m
+import musicbrainzngs as mb
+
+def init():
+	mb.set_useragent("My Crazy Music App", "3.7", "http://d34d.net/music")
 
 def system_example():
 	flac_cmd = 'flac ...'
@@ -41,7 +45,8 @@ def main():
 	print("hey %s" % sys.argv[0])
 	d = toml.load("settings.toml")
 	print(d)
-
+	init()
+	test_mb2()
 if __name__ == "__main__":
 	main()
 
