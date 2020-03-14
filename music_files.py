@@ -19,8 +19,13 @@ def test_mb():
 	# If you plan to submit data, authenticate
 	#musicbrainzngs.auth("user", "password")
 
-	musicbrainzngs.set_useragent("My Crazy Music App", "3.7", "http://d34d.net/music")
 	#musicbrainzngs.set_hostname("beta.musicbrainz.org")
+
+	result = musicbrainzngs.search_artists(artist="xx", type="group",
+										   country="GB")
+	for artist in result['artist-list']:
+		print(u"{id}: {name}".format(id=artist['id'], name=artist["name"]))
+
 
 def test_mb2():
 	m.set_useragent("My Crazy Music App", "3.7", "http://d34d.net/music")
@@ -46,7 +51,8 @@ def main():
 	d = toml.load("settings.toml")
 	print(d)
 	init()
-	test_mb2()
+	test_mb()
+
 if __name__ == "__main__":
 	main()
 
