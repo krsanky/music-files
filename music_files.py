@@ -33,6 +33,9 @@ def test_mb2():
 	#print(m.get_releases_by_discid("BG.iuI50.qn1DOBAWIk8fUYoeHM-"))
 	#print(m.get_recordings_by_isrc("GBAYE9300106"))
 
+def _tag_file(fn, artist, album, trknum, songname):
+	print("fn:{} a:{} album:{} trknum:{} song:{}".format(fn, artist, album, trknum, songname))
+
 def tag_capt_n_resp_ship_of_fools():
 	"""
 	Out[4]: <Artist 779504 'Captain Not Responsible'>
@@ -49,6 +52,7 @@ def tag_capt_n_resp_ship_of_fools():
 	filesd = Path(srcd)
 	for file, track in zip(filesd.iterdir(), tracklist):
 		print("file:{} trk:{} {}".format(file.name, track.position, track.title))
+		_tag_file(file.name, a.name, release.title, track.position, track.title)
 
 	return tracklist
 
