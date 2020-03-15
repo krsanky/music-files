@@ -1,5 +1,5 @@
 
-_token = 'FmTLCahNgCKPBmXWcPebTYgyFqMfQRWDEKVuTMyw'
+_token = 'qwdqwdqwdqwdqwd'  
 
 def init():
 	import discogs_client
