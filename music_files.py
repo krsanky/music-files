@@ -4,7 +4,7 @@ import toml
 import musicbrainzngs
 import musicbrainzngs as m
 import musicbrainzngs as mb
-import discogs_test as dt
+import discogs_1 as dt
 from mediafile import MediaFile 
 
 def init():
